@@ -22,7 +22,7 @@ public class TeacherService {
         if (teacherRepository.save(teacher) != null) {
             return "The teacher add done :" + teacher.toString();
         } else {
-            return "there was error in add";
+            return "there was error.jsp in add";
         }
     }
 
@@ -31,7 +31,7 @@ public class TeacherService {
 
     }
 
-    public String deletById(Integer id) {
+    public String deleteById(Integer id) {
         teacherRepository.deleteById(id);
         return "delet teacher with id " + id + "  Done";
     }

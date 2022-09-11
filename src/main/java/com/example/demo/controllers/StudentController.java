@@ -22,6 +22,30 @@ public class StudentController {
     public List<Student	> getAllCourse(){
         return studentService.getAllStudent();
     }
+//    @GetMapping("/getTest/{name}")
+//    public List<Student	> getAll(@PathVariable String name){
+//        return studentService.gettest(name);
+//    }
+    @GetMapping("/getTest2/{name}")
+    public Integer getAll2(@PathVariable java.sql.Date name){
+
+        return studentService.gettest2(name);
+    }
+    @GetMapping("/get")
+    public List<List<String>> getAll3(){
+        List<List<String>> test = new ArrayList<>();
+        List<String> studentt = new ArrayList<>();
+        studentt.add("here");
+        studentt.add("we");
+        studentt.add("are");
+        List<String> studenttt = new ArrayList<>();
+        studenttt.add("HERE");
+        studenttt.add("WE");
+        studenttt.add("ARE");
+        test.add(studentt);
+        test.add(studenttt);
+        return test;
+    }
 
     @PostMapping("/add")
     public String addNewCourse(@RequestBody Student student){
@@ -36,7 +60,7 @@ public class StudentController {
             Course c1 = new Course();
             List<Course> listOfCourses = new ArrayList<>();
             listOfCourses.add(c1);
-            Student s = new Student("Ahmad","salfet",75, 599234567L, (java.sql.Date) date1,"CE" , listOfCourses);
+            Student s = new Student("Ahmad","salfet","ahmad@gmail.com","male",75, 599234567L, (java.sql.Date) date1,"CE" , listOfCourses);
             studentService.addNewStudent(s);
             return Optional.of(s);
         } else {

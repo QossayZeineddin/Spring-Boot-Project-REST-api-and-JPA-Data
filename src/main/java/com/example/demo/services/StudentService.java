@@ -1,13 +1,13 @@
 package com.example.demo.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.example.demo.models.Student;
+import com.example.demo.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.models.Student;
-import com.example.demo.repositories.StudentRepository;
+import java.sql.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -23,7 +23,7 @@ public class StudentService {
 
             return "The student add done :" + student.toString();
         } else {
-            return "there was error in add";
+            return "there was error.jsp in add";
         }
     }
 
@@ -70,4 +70,18 @@ public class StudentService {
         }
     }
 
+//    public List<Student> gettest(String name) {
+//        System.out.print("\n\n\n\n\nherer is testing\n\n");
+//        //System.out.print( studentRepository.findByName(name));
+//
+//        return studentRepository.findByName(name);
+//    }
+
+    public Integer gettest2(Date name) {
+        System.out.print("\n\n\n\n\nherer is testing\n\n");
+        //System.out.print( studentRepository.findByName(name));
+        return studentRepository.findByNameCount(name);
+
+
+    }
 }

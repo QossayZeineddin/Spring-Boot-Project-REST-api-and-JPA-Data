@@ -34,7 +34,7 @@ public class TeacherController {
             Course ss = new Course();
             c.add(ss);
             TeacherSalary t1 = new TeacherSalary();
-            Teacher t = new Teacher("wasel","ramallah", 565656565L,"CE",c,t1);
+            Teacher t = new Teacher("wasel","wasel@gmail.com","male",true,"ramallah", 565656565L,"CE",c,t1);
             teacherService.AddNewTeacher(t);
             return Optional.of(t);
         } else {
@@ -45,7 +45,7 @@ public class TeacherController {
 
     @DeleteMapping("delete/{id}")
     public String deletOne(@PathVariable Integer id) {
-        return teacherService.deletById(id);
+        return teacherService.deleteById(id);
     }
 
     @PutMapping("update/{id}")

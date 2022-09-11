@@ -27,7 +27,7 @@ public class CourseService {
         if (courseRepository.save(course) != null) {
             return "The Course add done :" + course.toString();
         } else {
-            return "there was error in add";
+            return "there was error.jsp in add";
         }
     }
 

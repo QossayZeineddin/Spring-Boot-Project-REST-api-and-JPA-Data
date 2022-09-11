@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -26,6 +29,17 @@ public class Student {
 
     @Column(name = "student_address" , nullable = false )
     private String student_address;
+
+    @NotBlank(message = "Email must not be blank!")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9.-]+$", message = "Invalid email pattern")
+    @Email(message = "Email must be valid")
+    private String email;
+
+
+    @NotBlank
+    @Column(name = "gender")
+    @Size(min = 4 , max = 6 , message = "enter valed gender")
+    private String gender;
 
     @Column(name = "student_GPA" , nullable = false )
     private Integer student_GPA;
@@ -49,9 +63,11 @@ public class Student {
         // TODO Auto-generated constructor stub
     }
 
-    public Student(String student_name, String student_address, Integer student_GPA, Long student_phone, Date student_Date_of_brith, String student_major, List<Course> courseList) {
+    public Student(String student_name, String student_address,String email ,String gender, Integer student_GPA, Long student_phone, Date student_Date_of_brith, String student_major, List<Course> courseList) {
         this.student_name = student_name;
         this.student_address = student_address;
+        this.email = email;
+        this.gender = gender;
         this.student_GPA = student_GPA;
         this.student_phone = student_phone;
         this.student_Date_of_brith = student_Date_of_brith;
@@ -103,6 +119,26 @@ public class Student {
         return student_Date_of_brith;
     }
 
+    public void setStudent_id(Integer student_id) {
+        this.student_id = student_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public void setStudent_Date_of_brith(Date student_Date_of_brith) {
         this.student_Date_of_brith = student_Date_of_brith;
     }
@@ -121,5 +157,21 @@ public class Student {
 
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "student_id=" + student_id +
+                ", student_name='" + student_name + '\'' +
+                ", student_address='" + student_address + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", student_GPA=" + student_GPA +
+                ", student_phone=" + student_phone +
+                ", student_Date_of_brith=" + student_Date_of_brith +
+                ", student_major='" + student_major + '\'' +
+                ", courseList=" + courseList +
+                '}';
     }
 }
