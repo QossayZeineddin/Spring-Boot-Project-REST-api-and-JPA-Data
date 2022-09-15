@@ -2,7 +2,7 @@ var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
 var idOfCurrntUser = 0;
 
 $(document).ready(function () {
-    $("#my-tabs li").click(function(){
+    $("#my-tabs li").click(function () {
         var myId = $(this).attr("id");
         $(this).removeClass("inactive").siblings().addClass("inactive");
         $(".test-tabs div").hide();
@@ -90,7 +90,7 @@ $(document).ready(function () {
                 data: new FormData(this),
                 contentType: false,
                 processData: false,
-                async:false,
+                async: false,
                 success: function (data) {
                     $('#people_form')[0].reset();
                     $('#userModal').modal('hide');
@@ -106,6 +106,186 @@ $(document).ready(function () {
 
 
     });
+
+
+    $(document).on('click', '#tab1', function () {
+        $('tbody.user-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/users/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                //$('#emp').append('<br><br>');
+                $(data).each(function (index, item) {
+                    $('.user-table').append(
+                        '<tr><td>' + item.id +
+                        '</td><td>' + item.name +
+                        '</td><td>' + item.phonenum +
+                        '</td><td>' + item.email +
+                        '</td><td>' + item.userDateOfBrith +
+                        '</td><td>' + item.gender +
+                        '</td><td>' + item.userType +
+
+                        '</td><th> <button class="update-user"> Edit</button>' +
+                        '</th><th> <button class="delete-user"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
+    $(document).on('click', '#tab2', function () {
+        $('tbody.studnt-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/student/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                $(data).each(function (index, item) {
+                    $('.studnt-table').append(
+                        '<tr><td>' + item.student_id +
+                        '</td><td>' + item.student_name +
+                        '</td><td>' + item.student_address +
+                        '</td><td>' + item.student_phone +
+                        '</td><td>' + item.email +
+                        '</td><td>' + item.student_Date_of_brith +
+                        '</td><td>' + item.gender +
+                        '</td><td>' + item.student_GPA +
+                        '</td><td>' + item.student_major +
+                        '</td><th> <button class="update-teacher"> Edit</button>' +
+                        '</th><th> <button class="delete-teacher"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
+
+    $(document).on('click', '#tab3', function () {
+        $('tbody.teacher-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/teacher/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                $(data).each(function (index, item) {
+                    $('.teacher-table').append(
+                        '<tr><td>' + item.teacher_id +
+                        '</td><td>' + item.teacher_name +
+                        '</td><td>' + item.teacher_address +
+                        '</td><td>' + item.teacher_phone +
+                        '</td><td>' + item.email +
+                        '</td><td>' + item.married +
+                        '</td><td>' + item.gender +
+                        '</td><td>' + item.teacher_major +
+                        '</td><th> <button class="update-teacher"> Edit</button>' +
+                        '</th><th> <button class="delete-teacher"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
+    $(document).on('click', '#tab4', function () {
+        $('tbody.course-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/course/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                $(data).each(function (index, item) {
+                    $('.teacher-table').append(
+                        '<tr><td>' + item.course_id +
+                        '</td><td>' + item.course_name +
+                        '</td><td>' + item.course_code +
+                        '</td><td>' + item.course_secation +
+                        '</td><td>' + item.course_time +
+                        '</td><th> <button class="update-teacher"> Edit</button>' +
+                        '</th><th> <button class="delete-teacher"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
+    $(document).on('click', '#tab5', function () {
+        $('tbody.courseBook-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/CourseBook/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                $(data).each(function (index, item) {
+                    $('.teacher-table').append(
+                        '<tr><td>' + item.book_id +
+                        '</td><td>' + item.book_name +
+                        '</td><td>' + item.edition +
+                        '</td><td>' + item.price +
+                        '</td><th> <button class="update-teacher"> Edit</button>' +
+                        '</th><th> <button class="delete-teacher"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
+    $(document).on('click', '#tab6', function () {
+        $('tbody.teacherSalary-table').empty();
+        $(".overlay").show();
+        $.ajax({
+            url: "/teacherSalary/getAll",
+            dataType: "json",
+            type: 'Get',
+            contentType: "application/json",
+            success: function (data) {
+                $(data).each(function (index, item) {
+                    $('.teacher-table').append(
+                        '<tr><td>' + item.salary_id +
+                        '</td><td>' + item.amount +
+                        '</td><td>' + item.raise +
+                        '</td><td>' + item.total_salary +
+                        '</td><th> <button class="update-teacher"> Edit</button>' +
+                        '</th><th> <button class="delete-teacher"> Delete</button>' +
+                        '</th></tr>'
+                    )
+                });
+            },
+            complete: function () {
+                $(".overlay").hide();
+            }
+        });
+    });
+
 
 
     $(document).on('click', '.update', function () {
@@ -395,8 +575,6 @@ $(document).ready(function () {
             return false;
         }
     });
-
-
 
 
 });

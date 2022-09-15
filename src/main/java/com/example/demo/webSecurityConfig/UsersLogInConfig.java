@@ -10,23 +10,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class UsersLogInConfig extends WebSecurityConfigurerAdapter {
-//    final
+    //    final
 //    DataSource dataSource;
     final
     UserRepository userRepository;
 
     @Autowired
-    public UsersLogInConfig( UserRepository userRepository) {
+    public UsersLogInConfig(UserRepository userRepository) {
 
         this.userRepository = userRepository;
     }
@@ -68,15 +64,7 @@ public class UsersLogInConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers("/users").authenticated().
-//                anyRequest().permitAll().
-//                and().
-//                formLogin().
-//                usernameParameter("name").
-//                defaultSuccessUrl("/users").
-//                permitAll().
-//                and().
-//                logout().logoutSuccessUrl("/").permitAll();
+
         http.csrf().disable().
                 authorizeRequests().
                 antMatchers("/").permitAll().
@@ -85,9 +73,8 @@ public class UsersLogInConfig extends WebSecurityConfigurerAdapter {
                 and().
                 formLogin().
                 loginPage("/login").permitAll().
-                loginProcessingUrl("/loginCheck").
-                defaultSuccessUrl("/index", true).
-                failureForwardUrl("/newLogin");
+                loginProcessingUrl("/loginCheck").failureForwardUrl("/newLogin").
+                defaultSuccessUrl("/index", true);
 
 
     }

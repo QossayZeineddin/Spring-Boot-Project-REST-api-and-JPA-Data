@@ -9,11 +9,12 @@ import java.util.List;
 
 public class UserSecurity implements UserDetails {
 
-    private  Users users;
+    private Users users;
 
     public UserSecurity(Users users) {
         this.users = users;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

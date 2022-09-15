@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.UserSecurity;
 import com.example.demo.models.Users;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.*;
@@ -8,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 
-@RequestMapping(value = "/",method  = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT} )
 @Controller
 public class LoginController {
 
@@ -30,10 +30,11 @@ public class LoginController {
     private CourseBooksService courseBooksService;
     @Autowired
     private TeacherSalaryService teacherSalaryService;
+    UserSecurity userSecurity;
 
 
 
-    @GetMapping(value = {"login"})
+    @GetMapping(value = {"login","/"})
     public String loginPage() {
         return "newLogin";
     }
@@ -47,7 +48,6 @@ public class LoginController {
         model.addAttribute("course", courseService.getAllCourse());
         model.addAttribute("coursesBook", courseBooksService.getAllCourseBook());
         model.addAttribute("teacherSalary", teacherSalaryService.getAllTeacherSalary());
-        //model.addAttribute("userName", userName);
         return "add-new-user";
     }
 
