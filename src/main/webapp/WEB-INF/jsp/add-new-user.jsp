@@ -101,7 +101,7 @@
                 <th>Gender</th>
                 <th>student_GPA</th>
                 <th>student_major</th>
-                <th scope="col" width="5%">Edit</th>
+<%--                <th scope="col" width="5%">Edit</th>--%>
                 <th scope="col" width="5%">Delete</th>
             </tr>
             </thead>
@@ -152,7 +152,7 @@
                 <th>Is married</th>
                 <th>Gender</th>
                 <th>Teacher Major</th>
-                <th scope="col" width="5%">Edit</th>
+<%--                <th scope="col" width="5%">Edit</th>--%>
                 <th scope="col" width="5%">Delete</th>
             </tr>
             </thead>
@@ -199,7 +199,7 @@
                 <th>Coutrse code</th>
                 <th>Course Secation</th>
                 <th>Course Time</th>
-                <th scope="col" width="5%">Edit</th>
+<%--                <th scope="col" width="5%">Edit</th>--%>
                 <th scope="col" width="5%">Delete</th>
             </tr>
             </thead>
@@ -241,7 +241,7 @@
                 <th>Book Edition</th>
                 <th>Book Price</th>
 
-                <th scope="col" width="5%">Edit</th>
+<%--                <th scope="col" width="5%">Edit</th>--%>
                 <th scope="col" width="5%">Delete</th>
             </tr>
             </thead>
@@ -283,7 +283,7 @@
                 <th>Amount</th>
                 <th>Raise</th>
                 <th>Total Salary</th>
-                <th scope="col" width="5%">Edit</th>
+<%--                <th scope="col" width="5%">Edit</th>--%>
                 <th scope="col" width="5%">Delete</th>
             </tr>
             </thead>

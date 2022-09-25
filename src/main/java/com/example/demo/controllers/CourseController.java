@@ -7,6 +7,7 @@ import com.example.demo.models.Teacher;
 import com.example.demo.services.CourseService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -47,9 +48,10 @@ public class CourseController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deletOne(@PathVariable Integer id) {
-        return courseService.deletById(id);
+    @DeleteMapping("delete/course")
+    public String DeleteCourse(Model model, @RequestBody String id) {
+        courseService.deletById(Integer.parseInt(id));
+        return "done";
     }
 
     @GetMapping(value = {"find" , "find/" , "delete/" , "delete" , "update/", "update"})

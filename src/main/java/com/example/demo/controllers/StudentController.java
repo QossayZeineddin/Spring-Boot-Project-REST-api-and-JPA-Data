@@ -4,6 +4,7 @@ import com.example.demo.models.Course;
 import com.example.demo.models.Student;
 import com.example.demo.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,9 +82,9 @@ public class StudentController {
         return studentService.update(id, name, address, phoneNumber);
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deletOne(@PathVariable Integer id) {
-        return studentService.deletById(id);
+    @DeleteMapping("/delete/student")
+    public String DeleteStudent(Model model, @RequestBody String id) {
+        studentService.deletById(Integer.parseInt(id));
+        return "done";
     }
-
 }

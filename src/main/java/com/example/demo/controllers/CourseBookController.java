@@ -3,39 +3,40 @@ package com.example.demo.controllers;
 import com.example.demo.models.CourseBooks;
 import com.example.demo.services.CourseBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("CourseBook")
+@RequestMapping("/CourseBook")
 public class CourseBookController {
 
     @Autowired
     private CourseBooksService courseBooksService;
 
-    @GetMapping("getAll")
+    @GetMapping("/getAll")
     public List<CourseBooks> getAllCourseBook() {
         return courseBooksService.getAllCourseBook();
     }
 
-    @GetMapping("find/{id}")
+    @GetMapping("/find/{id}")
     public Optional<CourseBooks> findById(@PathVariable Integer id) {
         return courseBooksService.findById(id);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public CourseBooks addNewCoursebook(@RequestBody CourseBooks courseBooks) {
         return courseBooksService.addNewCourseBook(courseBooks);
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deletById(@PathVariable Integer id) {
-        return courseBooksService.deletById(id);
+    @DeleteMapping("/delete/courseBook")
+    public String DeleteCourseBook(Model model, @RequestBody String id) {
+        courseBooksService.deletById(Integer.parseInt(id));
+        return "done";
     }
-
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public String update(@PathVariable Integer id,
                          @RequestParam String book_name,
                          @RequestParam String editiom,

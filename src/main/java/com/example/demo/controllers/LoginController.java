@@ -1,23 +1,16 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.UserSecurity;
-import com.example.demo.models.Users;
-import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-
-import java.sql.Date;
-import java.util.Calendar;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private UserService userService;
     @Autowired
@@ -30,11 +23,8 @@ public class LoginController {
     private CourseBooksService courseBooksService;
     @Autowired
     private TeacherSalaryService teacherSalaryService;
-    UserSecurity userSecurity;
 
-
-
-    @GetMapping(value = {"login","/"})
+    @GetMapping(value = {"login", "/"})
     public String loginPage() {
         return "newLogin";
     }
@@ -56,95 +46,6 @@ public class LoginController {
         return "newLogin";
     }
 
-    //************ ======= Delete Methodes ===== ***********************
-
-    @DeleteMapping("delete/user")
-    public String DeleteUser(Model model, @RequestBody String id) {
-        userService.DeleteUserById(Integer.parseInt(id));
-        model.addAttribute("user", userService.getAllUsers());
-        return "add-new-user";
-    }
-
-    @DeleteMapping("delete/student")
-    public String DeleteStudent(Model model, @RequestBody String id) {
-        studentService.deletById(Integer.parseInt(id));
-        model.addAttribute("user", studentService.getAllStudent());
-        return "add-new-user";
-    }
-    @DeleteMapping("delete/teacher")
-    public String DeleteTeacher(Model model, @RequestBody String id) {
-        teacherService.deleteById(Integer.parseInt(id));
-        model.addAttribute("user", teacherService.getAllTeacher());
-        return "add-new-user";
-    }
-    @DeleteMapping("delete/teacherSalary")
-    public String DeleteTeacherSalary(Model model, @RequestBody String id) {
-        teacherSalaryService.deleteById(Integer.parseInt(id));
-        model.addAttribute("user", studentService.getAllStudent());
-        return "add-new-user";
-    }
-    @DeleteMapping("delete/course")
-    public String DeleteCourse(Model model, @RequestBody String id) {
-        courseService.deletById(Integer.parseInt(id));
-        model.addAttribute("user", courseService.getAllCourse());
-        return "add-new-user";
-    }
-    @DeleteMapping("delete/courseBook")
-    public String DeleteCourseBook(Model model, @RequestBody String id) {
-        courseBooksService.deletById(Integer.parseInt(id));
-        model.addAttribute("user", courseBooksService.getAllCourseBook());
-        return "add-new-user";
-    }
-
-
-    @PostMapping("insert")
-    public String done(Model model, String names, String numbers, String emails, String data_of_brith,
-                       String password1, String password2, String gender, Integer user_type) {
-        model.addAttribute("names", names);
-        model.addAttribute("numbers", numbers);
-        model.addAttribute("emails", emails);
-        model.addAttribute("date_of_brith", data_of_brith);
-        model.addAttribute("password1", password1);
-        model.addAttribute("password2", password2);
-        model.addAttribute("gender", gender);
-        model.addAttribute("user_type", user_type);
-
-        if (model.addAttribute("password1", password1) != model.addAttribute("password2", password2)) {
-            model.addAttribute("errorMassage1", "Sorry the tow password not macked again");
-            return "newLogin";
-
-        } else {
-            Date date1 = Date.valueOf(data_of_brith);  //converting string into sql date
-            java.sql.Date date2 = new java.sql.Date(Calendar.getInstance().getTime().getTime()); // current date sql format
-            // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            //String encoderPassword = encoder.encode(password1);
-            Users u1 = new Users(user_type, names, emails, gender, numbers, date1, password1, date2);
-            System.out.println("New New" + u1.toString());
-            userService.addNewUser(u1);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            model.addAttribute("user", userService.getAllUsers());
-            return "add-new-user";
-        }
-    }
-
-
-    @PostMapping("user/update")
-    public String update(Model model, @RequestBody Users users) {
-        System.out.print("\n\nUpdate user to: " + users.toString() + "\n");
-        Users u1 = userRepository.findById(users.getId()).get();
-        System.out.print("\nuser Befor update: " + u1.toString() + "\n");
-        Users u11 = userService.updateUser(users.getId(), users.getName(), users.getEmail(),users.getPhonenum(),
-                users.getGender(), users.getUserDateOfBrith(),users.getUserType(), users.getPassword());
-        System.out.print("\nuser After update: " + u11.toString() + "\n");
-        model.addAttribute("user", userService.getAllUsers());
-        return "add-new-user";
-
-
-    }
 
 }
 

@@ -19,13 +19,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Boolean addNewUser(Users users) {
+    public Users addNewUser(Users users) {
 
-        if (userRepository.save(users) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return userRepository.save(users);
     }
 
     public Users findById(Integer id) {
@@ -38,50 +34,50 @@ public class UserService {
 
 
     public Users updateUser(Integer id, String name, String email, String phoneNumber,
-                              String gender, Date dateOfBrith, Integer userType, String password) {
+                            String gender, Date dateOfBrith, Integer userType, String password) {
 
-        System.out.print("\n " +name+" "+ email +" " + phoneNumber +"\n\n" );
+        System.out.print("\n " + name + " " + email + " " + phoneNumber + "\n\n");
         if (userRepository.findById(id).equals(Optional.empty())) {
             return null;
         } else {
             Users u1 = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("User with id " + id + " dose not exist"));
-            System.out.print("\n here11 name \n " + name + "emmil" + email + " phonemuber "+ phoneNumber + " \n\n"  );
+            System.out.print("\n here11 name \n " + name + "emmil" + email + " phonemuber " + phoneNumber + " \n\n");
 
 
             if (name != null && name.length() > 0 && u1.getName().equals(name) == false) {
                 u1.setName(name);
-                System.out.print("\n here name \n " );
+                System.out.print("\n here name \n ");
             }
             if (email != null && email.length() > 0 && u1.getEmail().equals(email) == false) {
                 u1.setEmail(email);
-                System.out.print("\n here email \n " );
+                System.out.print("\n here email \n ");
             }
-            if (userType != null && userType == 1 && u1.getUserType() != userType) {
+            if (userType != null && (userType == 1 || userType == 0) && u1.getUserType() != userType) {
                 u1.setUserType(userType);
-                System.out.print("\n here usre type \n " );
+                System.out.print("\n here usre type \n ");
             }
             if (phoneNumber != null && phoneNumber.length() == 9 && u1.getPhonenum().equals(phoneNumber) == false) {
                 u1.setPhonenum(phoneNumber);
-                System.out.print("\n here phone numer \n " );
+                System.out.print("\n here phone numer \n ");
             }
             if (gender != null && gender.length() > 0 && u1.getGender().equals(gender) == false) {
                 u1.setGender(gender);
-                System.out.print("\n here gender \n " );
+                System.out.print("\n here gender \n ");
             }
             if (password != null && password.length() > 0 && u1.getPassword().equals(password) == false) {
                 u1.setPassword(password);
-                System.out.print("\n here password \n " );
+                System.out.print("\n here password \n ");
             }
             if (dateOfBrith != null && u1.getUserDateOfBrith().equals(dateOfBrith) == false) {
                 u1.setUserDateOfBrith(dateOfBrith);
-                System.out.print("\n here date of brith \n " );
+                System.out.print("\n here date of brith \n ");
             }
-            Users ww =  userRepository.save(u1);
+            Users ww = userRepository.save(u1);
             //Boolean x = addNewUser(u1);
             //if (x == false) {
-              //  return null;
+            //  return null;
             //} else {
-                return ww;
+            return ww;
             //}
 
         }

@@ -5,6 +5,7 @@ import com.example.demo.models.Teacher;
 import com.example.demo.models.TeacherSalary;
 import com.example.demo.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -43,9 +44,10 @@ public class TeacherController {
 
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deletOne(@PathVariable Integer id) {
-        return teacherService.deleteById(id);
+    @DeleteMapping("delete/teacher")
+    public String DeleteTeacher(Model model, @RequestBody String id) {
+        teacherService.deleteById(Integer.parseInt(id));
+        return "done";
     }
 
     @PutMapping("update/{id}")
